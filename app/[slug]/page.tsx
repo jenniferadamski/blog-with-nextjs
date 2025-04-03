@@ -6,7 +6,7 @@ export async function generateStaticParams() {
 
     return posts?.map(({ slug }) => ({
         slug,
-    }))
+    })) as [];
 }
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
