@@ -9,7 +9,8 @@ export async function generateStaticParams() {
     }))
 }
 
-export default async function Page({ params: { slug } }: { params: { slug: string } }) {
+export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
+    const { slug } = await params;
     const { data: post } = await supabase.from('posts').select().match({ slug }).single();
 
     if (!post) {
