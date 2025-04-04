@@ -3,7 +3,7 @@ import supabase from "../_utils/supabase";
 import { format } from "date-fns";
 
 export default async function LatestPosts() {
-    const { data: posts } = await supabase.from('posts').select('slug, title, created_at').order('created_at', { ascending: false });
+    const { data: posts } = await supabase.from('posts').select('slug, title, created_at').order('created_at', { ascending: false }).limit(10);
 
     if (!posts) {
         return <p>Aucun article trouvé.</p>
