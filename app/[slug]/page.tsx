@@ -1,5 +1,5 @@
-import { notFound } from 'next/navigation';
-import supabase from '../_utils/supabase';
+import { notFound } from "next/navigation";
+import supabase from "../_utils/supabase";
 
 export async function generateStaticParams() {
     const { data: posts } = await supabase.from('posts').select('slug');
