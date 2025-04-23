@@ -1,3 +1,11 @@
+export default function CreatingArticle() {
+    return (
+        <>
+            <h1>Création d&apos;un article</h1>
+        </>
+    )
+}
+
 // import Head from 'next/head';
 // import Editor from '../../../_utils/editor/Editor';
 
