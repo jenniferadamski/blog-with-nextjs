@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { signOut } from "../login/actions";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
     return (
@@ -12,6 +13,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                         <Link href="/dashboard/categories" className="w-full">Catégories</Link>
                     </li>
                 </ul>
+
+                <button className="cursor-pointer h-10 flex items-center px-10 text-red-500" onClick={signOut}>Se déconnecter</button>
             </nav>
             {children}
         </div>
