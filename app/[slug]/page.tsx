@@ -1,8 +1,10 @@
 import { notFound } from "next/navigation";
-import supabase from "../_utils/supabase";
+import createClient from "@/app/_utils/supabase/client";
+import NavBar from "@/app/_ui/NavBar";
 import { format } from "date-fns";
 
 export async function generateStaticParams() {
+    const supabase = await createClient();
     const { data: posts } = await supabase.from('posts').select('slug');
 
     return posts?.map(({ slug }) => ({
@@ -11,20 +13,24 @@ export async function generateStaticParams() {
 }
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
+    const supabase = await createClient();
     const { slug } = await params;
-    const { data: post } = await supabase.from('posts').select("*, users(username)").match({ slug }).single();
+    const { data: post } = await supabase.from('posts').select("*, users(username), categories(name)").match({ slug }).single();
 
     if (!post) {
         notFound();
     }
 
     return (
-        <div className="px-8 py-6">
-            <div className="mb-8">
-                <h1 className="mb-2 text-4xl">{post.title}</h1>
-                <span>Publié le {format(post.created_at, 'dd/MM/yyyy')} par {post.users.username}</span>
+        <>
+            <NavBar />
+            <div className="px-8 py-6">
+                <div className="mb-8">
+                    <h1 className="mb-2 text-4xl">{post.title}</h1>
+                    <span className="text-gray-400">Publié le {format(post.created_at, 'dd/MM/yyyy')} par {post.users.username} dans {post.categories.name}</span>
+                </div>
+                <p>{post.content}</p>
             </div>
-            <p>{post.content}</p>
-        </div>
+        </>
     )
 }
