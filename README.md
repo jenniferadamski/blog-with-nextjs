@@ -5,6 +5,7 @@
 - Next.js
 - TypeScript
 - TailwindCSS
+- Cypress
 - Supabase
 - Vercel
 

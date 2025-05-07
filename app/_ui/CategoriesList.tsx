@@ -1,3 +1,4 @@
+import Link from "next/link";
 import createClient from "@/app/_utils/supabase/client";
 
 export default async function CategoriesList() {
@@ -12,8 +13,7 @@ export default async function CategoriesList() {
         <ul>
             {categories.map((category) => (
                 <li key={category.slug} className="mb-2">
-                    {/* TO DO : Ajout du bouton Modifier */}
-                    {category.name} <button type="button" className=" cursor-pointer mr-5 text-gray-400 text-sm">Modifier</button>
+                    {category.name} <Link href={`/dashboard/categories/edit/${category.slug}`} className="cursor-pointer mr-5 text-gray-400 text-sm">Modifier</Link>
                 </li>
             ))}
         </ul>

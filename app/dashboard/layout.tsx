@@ -7,6 +7,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             <nav className="bg-[#e3dddc] mr-10 w-20/100">
                 <ul className="flex flex-col">
                     <li className="h-10 flex items-center px-10">
+                        <Link href="/" className="text-gray-400 underline w-full">Voir le blog</Link>
+                    </li>
+                    <li className="h-10 flex items-center px-10">
                         <Link href="/dashboard/articles" className="w-full">Articles</Link>
                     </li>
                     <li className="h-10 flex items-center px-10">

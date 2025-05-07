@@ -40,3 +40,37 @@ export async function createCategory(formData: FormData) {
  
     revalidatePath("/");
 }
+
+export async function editCategory(slug: string, formData: FormData) {
+    const supabase = await createClient();
+    const categoryName = formData.get('categoryName') as string;
+    const { error } = await supabase
+        .from('categories')
+        .update([
+            {
+                name: categoryName,
+                slug: createSlug(categoryName),
+            },
+        ])
+        .eq('slug', slug);
+    
+    if (error) {
+        throw new Error(error.message);
+    }
+
+    revalidatePath('/dashboard/categories');
+    redirect('/dashboard/categories');
+}
+
+export async function deleteCategory(slug: string){
+    const supabase = await createClient();
+    const { error } = await supabase.from('categories').delete().eq('slug', slug);
+
+    if (error) {
+        console.error('Supabase DELETE error :', error);
+        throw new Error(error.message);
+    }
+
+    revalidatePath('/dashboard/categories');
+    redirect('/dashboard/categories');
+}
