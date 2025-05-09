@@ -1,10 +1,10 @@
-import { notFound } from "next/navigation";
-import createClient from "@/app/_utils/supabase/client";
 import NavBar from "@/app/_ui/NavBar";
+import createClient from "@/app/_utils/supabase/client";
 import { format } from "date-fns";
+import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
-    const supabase = await createClient();
+    const supabase = createClient();
     const { data: posts } = await supabase.from('posts').select('slug');
 
     return posts?.map(({ slug }) => ({
@@ -13,7 +13,7 @@ export async function generateStaticParams() {
 }
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
-    const supabase = await createClient();
+    const supabase = createClient();
     const { slug } = await params;
     const { data: post } = await supabase.from('posts').select("*, users(username), categories(name)").match({ slug }).single();
 

@@ -6,7 +6,7 @@ export default function DeleteCategoryButton({ categorySlug }: { categorySlug: s
     const handleDelete = async () => {
         try {
             const result = await deleteCategory(categorySlug);
-            console.log("Résultat suppression :", result);
+            console.error("Résultat suppression : ", result);
         } catch (e) {
             console.error("Erreur lors de la suppression", e);
         }

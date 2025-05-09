@@ -2,7 +2,7 @@ import Link from "next/link";
 import createClient from "@/app/_utils/supabase/client";
 
 export default async function CategoriesList() {
-    const supabase = await createClient();
+    const supabase = createClient();
     const { data: categories } = await supabase.from('categories').select('slug, name').order('name', { ascending: true });
 
     if (!categories) {

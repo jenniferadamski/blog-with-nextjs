@@ -1,10 +1,10 @@
-import { notFound } from "next/navigation";
-import createClient from "@/app/_utils/supabase/client";
 import DeleteCategoryButton from "@/app/_ui/DeleteCategoryButton";
+import createClient from "@/app/_utils/supabase/client";
 import { editCategory } from "../../actions";
+import { notFound } from "next/navigation";
 
 export default async function EditCategoryPage({ params }: { params: Promise<{ slug: string }> }) {
-    const supabase = await createClient();
+    const supabase = createClient();
     const { slug } = await params;
     const { data: category } = await supabase.from('categories').select("name").match({ slug }).single();
     const updateCategory = editCategory.bind(null, slug);
