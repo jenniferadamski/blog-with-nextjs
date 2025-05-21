@@ -15,7 +15,7 @@ export default async function ArticlesList({ published }: { published: boolean }
 
     return (
         <ul>
-            {published == true ? publishedPosts.map((post) => (
+            {published === true ? publishedPosts.map((post) => (
                 <li key={post.slug} className="mb-2">{post.title}</li>
             )) : draftPosts.map((post) => (
                 <li key={post.slug} className="mb-2">{post.title}</li>
