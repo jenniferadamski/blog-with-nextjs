@@ -4,7 +4,7 @@ import { login } from "./actions";
 export default function LoginPage() {
     return (
         <>
-            <div className="px-8 pt-6 pb-12 w-40 ">
+            <div className="px-8 pt-6 pb-12 w-40">
                 <Logo />
             </div>
 
