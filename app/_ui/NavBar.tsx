@@ -14,7 +14,11 @@ export default async function NavBar() {
             </div>
 
             {user
-                ? <button className="cursor-pointer h-10" onClick={signOut}>Se déconnecter</button>
+                ? <div className="flex flex-col sm:flex-row items-end sm:items-center">
+                    <Link href="/dashboard">Tableau de bord</Link>
+                    <button className="cursor-pointer h-10 ml-8 text-red-500" onClick={signOut}>Se déconnecter</button>
+                </div>
+
                 : <Link href="/login" className="cursor-pointer h-10">Se connecter</Link>
             }
         </nav>
